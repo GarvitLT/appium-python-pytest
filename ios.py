@@ -1,36 +1,21 @@
 from os import environ
-import os
 import pytest
 from appium import webdriver
-from requests import request
 
 @pytest.fixture(scope='function')
 def test_setup_ios(request):
     test_name = request.node.name
-    build = environ.get('BUILD', "Pytest iOS Sample")
+    build = environ.get('BUILD', "Pytest IOS Sample")
     caps = {}
     caps["deviceName"] = "iPhone 11"
     caps["platformName"] = "iOS"
     caps["platformVersion"] = "14"
-    caps["app"] = "APP_URL"  #add app (.ipa) url here
+    caps["app"] = "lt://proverbial-ios"     #Enter the app (.ipa) url here
     caps["isRealMobile"] = True
     caps['build'] = build
     caps['name'] = test_name
-
-    if os.environ.get("LT_USERNAME") is None:
-        # Enter LT username here if environment variables have not been added
-        username = "LT_USERNAME"
-    else:
-        username = os.environ.get("LT_USERNAME")
-
-    if os.environ.get("LT_ACCESS_KEY") is None:
-        # Enter LT accesskey here if environment variables have not been added
-        accesskey = "LT_ACCESS_KEY"
-    else:
-        accesskey = os.environ.get("LT_ACCESS_KEY")
-
-    url="https://"+username+":"+accesskey+"@mobile-hub.lambdatest.com/wd/hub"
-    driver = webdriver.Remote(url, caps)
+    caps['project'] = "Infobeans"
+    driver = webdriver.Remote("https://garvits:YjstUAGma4yzUhJUo0jH0aoYVjlfYokappBzEPvsSCOCcGcocy@mobile-hub.lambdatest.com/wd/hub", caps)   #Add LambdaTest username and accessKey here
     request.cls.driver = driver
     
     yield driver
@@ -38,10 +23,10 @@ def test_setup_ios(request):
     def fin():
         #browser.execute_script("lambda-status=".format(str(not request.node.rep_call.failed if "passed" else "failed").lower()))
         if request.node.rep_call.failed:
-            driver.execute_script("lambda-status=failed")
+            driver.execute_script('lambda-status=failed')
         else:
-            driver.execute_script("lambda-status=passed")
-            driver.quit()
+            driver.execute_script('lambda-status=passed')
+        driver.quit()
     request.addfinalizer(fin)
     
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
