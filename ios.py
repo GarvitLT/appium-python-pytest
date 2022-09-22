@@ -15,7 +15,7 @@ def test_setup_ios(request):
     caps['build'] = build
     caps['name'] = test_name
     caps['project'] = "Infobeans"
-    driver = webdriver.Remote("https://garvits:YjstUAGma4yzUhJUo0jH0aoYVjlfYokappBzEPvsSCOCcGcocy@mobile-hub.lambdatest.com/wd/hub", caps)   #Add LambdaTest username and accessKey here
+    driver = webdriver.Remote("https://<username>:<accessKey>@mobile-hub.lambdatest.com/wd/hub", caps)   #Add LambdaTest username and accessKey here
     request.cls.driver = driver
     
     yield driver
