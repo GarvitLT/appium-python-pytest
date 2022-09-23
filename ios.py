@@ -14,7 +14,7 @@ def test_setup_ios(request):
     caps["isRealMobile"] = True
     caps['build'] = build
     caps['name'] = test_name
-    caps['project'] = "Infobeans"
+    caps['project'] = "IOS Pytest"
     driver = webdriver.Remote("https://<username>:<accessKey>@mobile-hub.lambdatest.com/wd/hub", caps)   #Add LambdaTest username and accessKey here
     request.cls.driver = driver
     

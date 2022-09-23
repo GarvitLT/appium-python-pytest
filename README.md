@@ -138,7 +138,7 @@ You can update your custom capabilities in test scripts. In this sample project,
     caps["isRealMobile"] = True
     caps['build'] = build
     caps['name'] = test_name
-    caps['project'] = "Infobeans"
+    caps['project'] = project_name
 ```
 **Android:**
 
@@ -151,7 +151,7 @@ You can update your custom capabilities in test scripts. In this sample project,
     caps["isRealMobile"] = True
     caps['build'] = build
     caps['name'] = test_name
-    caps['project'] = "Infobeans"
+    caps['project'] = project_name
 ```
 
 **Info Note:**
@@ -180,6 +180,7 @@ pytest test.py
 ```bash
 pytest test_ios.py
 ```
+
 **Info Note:**
 If you are unable to run the automation script with the above mentioned commands try using `python -m` before the given commands.
 
